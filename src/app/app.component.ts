@@ -10,5 +10,5 @@ import {FooterComponent} from './modules/pages/fragment/footer/footer.component'
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'frontend';
+  title = 'CM-House';
 }
