@@ -6,6 +6,7 @@ button.active {
 
 button {
   transition: all 0.3s ease-in-out;
+  padding: 10px 15px;
 }
 
 img {
@@ -13,5 +14,5 @@ img {
 }
 
 .group:hover img {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
