@@ -1,0 +1,50 @@
+<!-- Section Hero -->
+<section class="relative bg-primary text-white text-center py-32">
+  <div class="container mx-auto px-6" @fadeIn>
+    <h1 class="text-5xl font-bold mb-4">Contactez-nous</h1>
+    <p class="text-xl">Nous sommes là pour répondre à toutes vos questions.</p>
+  </div>
+</section>
+
+<!-- Formulaire de Contact -->
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-6 max-w-4xl">
+    <h2 class="text-4xl font-bold mb-6 text-center" @fadeIn>Envoyez-nous un message</h2>
+
+    <form (submit)="submitForm()" class="bg-gray-100 p-8 rounded-lg shadow-lg">
+      <div class="mb-6">
+        <label for="name" class="block text-gray-700 font-semibold">Nom</label>
+        <input [(ngModel)]="name" id="name" type="text" required
+               class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+      </div>
+
+      <div class="mb-6">
+        <label for="email" class="block text-gray-700 font-semibold">Email</label>
+        <input [(ngModel)]="email" id="email" type="email" required
+               class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+      </div>
+
+      <div class="mb-6">
+        <label for="message" class="block text-gray-700 font-semibold">Message</label>
+        <textarea [(ngModel)]="message" id="message" required
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+      </div>
+
+      <button type="submit"
+              class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-black transition-transform transform hover:scale-105 w-full">
+        Envoyer
+      </button>
+    </form>
+  </div>
+</section>
+
+<!-- Carte Google Maps -->
+<section class="py-20 bg-gray-100 text-center">
+  <h2 class="text-4xl font-bold mb-6" @fadeIn>Notre Adresse</h2>
+  <div class="container mx-auto px-6">
+    <iframe
+      class="w-full h-80 rounded-lg shadow-lg"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.999247080881!2d2.2922926156741274!3d48.85884427928774!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fdfbe2d0b1f%3A0x8a8c79e3c7a77b78!2sTour%20Eiffel!5e0!3m2!1sen!2sfr!4v1631690952000!5m2!1sen!2sfr"
+      allowfullscreen="" loading="lazy"></iframe>
+  </div>
+</section>

@@ -1,0 +1,17 @@
+button.active {
+  background-color: #ff6600;
+  color: white;
+  border-color: #ff6600;
+}
+
+button {
+  transition: all 0.3s ease-in-out;
+}
+
+img {
+  transition: transform 0.5s ease-in-out;
+}
+
+.group:hover img {
+  transform: scale(1.1);
+}

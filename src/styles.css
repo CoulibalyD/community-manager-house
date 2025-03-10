@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  padding-top: 72px; /* Ajuste la hauteur en fonction de la navbar */
+}

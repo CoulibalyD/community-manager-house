@@ -1,0 +1,25 @@
+footer {
+  margin-top: auto; /* Remplacez le mt-16 par cette propriété */
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 -2px 10px rgba(255, 255, 255, 0.1);
+  width: 100%;
+}
+
+a {
+  font-weight: bold;
+  text-transform: uppercase;
+  transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+  color: #ff6600; /* Couleur orange */
+}
+
+img {
+  transition: transform 0.3s ease-in-out;
+}
+
+img:hover {
+  transform: scale(1.1);
+}
