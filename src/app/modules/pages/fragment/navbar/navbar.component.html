@@ -1,37 +1,55 @@
-<nav class="bg-primary text-white shadow-md fixed top-0 left-0 w-full z-50">
+<nav class="bg-primary text-white shadow-md fixed top-0 w-full z-50">
   <div class="container mx-auto px-6 py-3 flex justify-between items-center">
 
     <!-- Logo -->
     <a routerLink="/" class="flex items-center space-x-2">
-      <img src="assets/images/logo.jpg" alt="CM House Logo" class="h-12">
-<!--      <span class="text-2xl font-extrabold uppercase tracking-wide">CM House</span>-->
+      <img src="assets/images/logo.jpg" alt="Logo" class="h-10">
+      <span class="text-xl font-extrabold uppercase">CM House</span>
     </a>
 
-    <!-- Menu mobile -->
-    <button (click)="toggleMenu()" class="lg:hidden focus:outline-none">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-           xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M4 6h16M4 12h16m-7 6h7"></path>
-      </svg>
-    </button>
+    <!-- Liens de navigation accessibles à tous -->
+    <div class="hidden lg:flex space-x-6 items-center">
+      <a routerLink="/home" routerLinkActive="active-link" class="nav-link">Accueil</a>
+      <a routerLink="/about" routerLinkActive="active-link" class="nav-link">À propos</a>
+      <a routerLink="/services" routerLinkActive="active-link" class="nav-link">Services</a>
+      <a routerLink="/portfolio" routerLinkActive="active-link" class="nav-link">Portfolio</a>
+      <a routerLink="/contact" routerLinkActive="active-link" class="nav-link">Contact</a>
 
-    <!-- Liens de navigation -->
-    <div class="hidden lg:flex space-x-6">
-      <a routerLink="/home" class="hover:text-black font-bold uppercase tracking-wide">Accueil</a>
-      <a routerLink="/about" class="hover:text-black font-bold uppercase tracking-wide">À propos</a>
-      <a routerLink="/services" class="hover:text-black font-bold uppercase tracking-wide">Services</a>
-      <a routerLink="/portfolio" class="hover:text-black font-bold uppercase tracking-wide">Portfolio</a>
-      <a routerLink="/contact" class="hover:text-black font-bold uppercase tracking-wide">Contact</a>
+      <!-- Événements publics visibles par tous -->
+      <a routerLink="/events-publics" routerLinkActive="active-link" class="nav-link">Événements</a>
+
+      <!-- Lien admin visible uniquement pour les rôles élevés -->
+      <a *ngIf="(user$ | async)?.role === 'ADMIN' || (user$ | async)?.role === 'DIRECTEUR'"
+         routerLink="/events"
+         routerLinkActive="active-link"
+         class="nav-link">
+        Gérer les événements
+      </a>
+
+      <a *ngIf="(user$ | async)?.role === 'ADMIN'"
+         routerLink="/admin-panel"
+         routerLinkActive="active-link"
+         class="nav-link">
+        Admin Panel
+      </a>
     </div>
-  </div>
 
-  <!-- Menu mobile déroulant -->
-  <div *ngIf="isMenuOpen" class="lg:hidden bg-secondary text-white p-4">
-    <a routerLink="/home" class="block py-2 hover:text-primary font-bold uppercase tracking-wide">Accueil</a>
-    <a routerLink="/about" class="block py-2 hover:text-primary font-bold uppercase tracking-wide">À propos</a>
-    <a routerLink="/services" class="block py-2 hover:text-primary font-bold uppercase tracking-wide">Services</a>
-    <a routerLink="/portfolio" class="block py-2 hover:text-primary font-bold uppercase tracking-wide">Portfolio</a>
-    <a routerLink="/contact" class="block py-2 hover:text-primary font-bold uppercase tracking-wide">Contact</a>
+    <!-- Zone utilisateur -->
+    <div class="flex items-center space-x-3">
+      <!-- Utilisateur connecté -->
+      <span *ngIf="user$ | async as user" class="text-sm font-semibold" style="font-size: 14px">
+        {{ user.role }} | {{ user.email }}
+      </span>
+
+      <button *ngIf="user$ | async" (click)="logout()"
+              class="bg-white text-primary px-3 py-1 rounded hover:bg-gray-200 transition">
+        Déconnexion
+      </button>
+
+      <!-- Utilisateur non connecté -->
+      <a *ngIf="!(user$ | async)" routerLink="/login" class="nav-link">Connexion</a>
+      <a *ngIf="!(user$ | async)" routerLink="/register" class="nav-link">Inscription</a>
+    </div>
+
   </div>
 </nav>

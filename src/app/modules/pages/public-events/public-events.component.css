@@ -1,0 +1,12 @@
+img {
+  transition: transform 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.03);
+}
+
+h2 {
+  text-transform: uppercase;
+  font-weight: bold;
+}

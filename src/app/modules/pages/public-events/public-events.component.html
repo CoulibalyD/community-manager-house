@@ -1,0 +1,19 @@
+<section class="py-20 bg-white text-center">
+  <h2 class="text-4xl font-bold mb-6">Nos Événements</h2>
+
+  <div *ngIf="events.length === 0" class="text-gray-600">
+    Aucun événement pour le moment.
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-6 px-6 max-w-6xl mx-auto" *ngIf="events.length > 0">
+    <div *ngFor="let event of events" class="bg-gray-100 rounded-lg shadow-lg p-4 hover:shadow-xl transition">
+      <img [src]="getImageUrl(event.id!)" alt="{{ event.title }}"
+           class="w-full h-48 object-cover rounded mb-4">
+
+      <h3 class="text-xl font-bold">{{ event.title }}</h3>
+      <p class="text-gray-700">{{ event.description }}</p>
+      <p class="text-sm mt-2 text-gray-500"><strong>Date :</strong> {{ event.date }}</p>
+      <p class="text-sm text-gray-500"><strong>Lieu :</strong> {{ event.location }}</p>
+    </div>
+  </div>
+</section>
