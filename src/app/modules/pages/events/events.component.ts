@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import {AppEvent} from '../../model/Event';
 import {EventService} from '../../services/event.service';
 import {ConfirmEventDialogComponent} from '../../sequeleton/confirm-event-dialog/confirm-event-dialog.component';
-import {ToastrService} from 'ngx-toastr';
 
 @Component({
   standalone: true,
@@ -50,7 +49,7 @@ export class EventsComponent implements OnInit {
   }
 
 
-  constructor(private eventService: EventService,   private toastr: ToastrService ) {}
+  constructor(private eventService: EventService) {}
 
   ngOnInit(): void {
     this.loadEvents();
@@ -88,17 +87,14 @@ export class EventsComponent implements OnInit {
       this.eventService.updateEvent(this.editingEventId, formData).subscribe(() => {
         this.cancelEdit();
         this.loadEvents();
-        this.toastr.success('Événement mis à jour avec succès', 'Modification');
       });
     } else {
       this.eventService.createEvent(formData).subscribe(() => {
         this.resetForm();
         this.loadEvents();
-        this.toastr.success('Événement ajouté avec succès', 'Création');
       });
     }
   }
-
 
   deleteEvent(id: number): void {
     if (confirm('Voulez-vous vraiment supprimer cet événement ?')) {
@@ -180,13 +176,11 @@ export class EventsComponent implements OnInit {
     if (this.eventToDeleteId !== null) {
       this.eventService.deleteEvent(this.eventToDeleteId).subscribe(() => {
         this.loadEvents();
-        this.toastr.success('Événement supprimé avec succès', 'Suppression');
         this.showConfirmDialog = false;
         this.eventToDeleteId = null;
       });
     }
   }
-
 
 }
 
