@@ -21,6 +21,7 @@
   gap: 10px;
 }
 
+/*
 .cancel-button {
   color: #666;
 }
@@ -31,5 +32,9 @@
 }
 
 .confirm-button:hover {
-  background-color: #d32f2f;
+  background-color: #f1fbf8;
+}
+*/
+.confirm-button:hover {
+  background-color: rgba(246, 240, 240, 0.84);
 }

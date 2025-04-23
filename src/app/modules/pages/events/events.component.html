@@ -1,154 +1,153 @@
 <!-- Formulaire Ajouter/Modifier -->
-<section class="py-16 bg-gradient-to-b from-white to-gray-50">
-  <div class="container mx-auto px-4">
-    <h2 class="text-4xl font-bold text-gray-900 text-center mb-12">
-      {{ editingEventId ? 'Modifier l\'événement' : 'Nouvel événement' }}
-    </h2>
-
-    <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 hover:shadow-2xl">
-      <form class="space-y-6" (ngSubmit)="submitForm()">
-        <!-- Titre -->
-        <div>
-          <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Titre de l'événement</label>
-          <input [(ngModel)]="newEvent.title" name="title" id="title" type="text"
-                 class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all"
-                 placeholder="Nommez votre événement" required>
-        </div>
-
-        <!-- Description -->
-        <div>
-          <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
-          <textarea [(ngModel)]="newEvent.description" name="description" id="description" rows="4"
-                    class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all"
-                    placeholder="Décrivez votre événement..." required></textarea>
-        </div>
-
-        <!-- Date et Heure + Lieu -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<span  class="py-16 bg-gray-50" #eventForm>
+  <section  class="py-16 bg-gradient-to-b from-white to-gray-50">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-bold text-gray-900 text-center mb-12">
+        {{ editingEventId ? 'Modifier l\'événement' : 'Nouvel événement' }}
+      </h2>
+      <div class="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-8 transition-all duration-300 hover:shadow-2xl">
+        <form class="space-y-6" (ngSubmit)="submitForm()">
+          <!-- Titre -->
           <div>
-            <label for="date" class="block text-sm font-medium text-gray-700 mb-2">Date</label>
-            <input [(ngModel)]="newEvent.date" name="date" id="date" type="date"
-                   class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all" required>
-
-            <label for="time" class="block text-sm font-medium text-gray-700 mt-4 mb-2">Heure</label>
-            <input [(ngModel)]="newEvent.time" name="time" id="time" type="time"
-                   class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all" required>
-          </div>
-
-          <div>
-            <label for="location" class="block text-sm font-medium text-gray-700 mb-2">Lieu</label>
-            <input [(ngModel)]="newEvent.location" name="location" id="location" type="text"
+            <label for="title" class="block text-sm font-medium text-gray-700 mb-2">Titre de l'événement</label>
+            <input [(ngModel)]="newEvent.title" name="title" id="title" type="text"
                    class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all"
-                   placeholder="Localisation" required>
+                   placeholder="Nommez votre événement" required>
           </div>
-        </div>
 
-        <!-- Upload d'image -->
-        <!-- Upload d'image -->
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-2">Image principale</label>
+          <!-- Description -->
+          <div>
+            <label for="description" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+            <textarea [(ngModel)]="newEvent.description" name="description" id="description" rows="4"
+                      class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                      placeholder="Décrivez votre événement..." required></textarea>
+          </div>
 
-          <div
-            class="flex items-center justify-center w-full"
-            (dragover)="onDragOver($event)"
-            (dragleave)="onDragLeave($event)"
-            (drop)="onDrop($event)"
-          >
-            <label
-              [class.border-primary]="isDragging"
-              class="flex flex-col w-full border-2 border-dashed border-gray-300 hover:border-primary rounded-2xl cursor-pointer transition-all hover:bg-gray-50 p-6"
+          <!-- Date et Heure + Lieu -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label for="date" class="block text-sm font-medium text-gray-700 mb-2">Date</label>
+              <input [(ngModel)]="newEvent.date" name="date" id="date" type="date"
+                     class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all" required>
+
+              <label for="time" class="block text-sm font-medium text-gray-700 mt-4 mb-2">Heure</label>
+              <input [(ngModel)]="newEvent.time" name="time" id="time" type="time"
+                     class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all" required>
+            </div>
+
+            <div>
+              <label for="location" class="block text-sm font-medium text-gray-700 mb-2">Lieu</label>
+              <input [(ngModel)]="newEvent.location" name="location" id="location" type="text"
+                     class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all"
+                     placeholder="Localisation" required>
+            </div>
+          </div>
+
+          <!-- Upload d'image -->
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Image principale</label>
+
+            <div
+              class="flex items-center justify-center w-full"
+              (dragover)="onDragOver($event)"
+              (dragleave)="onDragLeave($event)"
+              (drop)="onDrop($event)"
             >
-              <div class="flex flex-col items-center justify-center">
-                <svg class="w-10 h-10 text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                </svg>
-                <p class="text-sm text-gray-600 text-center">
-                  Glissez une image ou <span class="text-primary font-medium">cliquez pour parcourir</span>
-                </p>
-                <p class="text-xs text-gray-400 mt-1">Formats acceptés : JPG, PNG</p>
-              </div>
+              <label
+                [class.border-primary]="isDragging"
+                class="flex flex-col w-full border-2 border-dashed border-gray-300 hover:border-primary rounded-2xl cursor-pointer transition-all hover:bg-gray-50 p-6"
+              >
+                <div class="flex flex-col items-center justify-center">
+                  <svg class="w-10 h-10 text-gray-400 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
+                  <p class="text-sm text-gray-600 text-center">
+                    Glissez une image ou <span class="text-primary font-medium">cliquez pour parcourir</span>
+                  </p>
+                  <p class="text-xs text-gray-400 mt-1">Formats acceptés : JPG, PNG</p>
+                </div>
 
-              <input
-                type="file"
-                (change)="onImageSelected($event)"
-                class="hidden"
-                accept="image/*"
-              />
-            </label>
+                <input
+                  type="file"
+                  (change)="onImageSelected($event)"
+                  class="hidden"
+                  accept="image/*"
+                />
+              </label>
+            </div>
+
+            <!-- 👁️ Aperçu de l'image sélectionnée -->
+            <div *ngIf="imagePreview" class="mt-4 text-center">
+              <p class="text-sm text-gray-600 mb-2">Aperçu :</p>
+              <img [src]="imagePreview" alt="Image sélectionnée" class="w-48 h-auto mx-auto rounded-lg shadow" />
+            </div>
           </div>
 
-          <!-- 👁️ Aperçu de l'image sélectionnée -->
-          <div *ngIf="imagePreview" class="mt-4 text-center">
-            <p class="text-sm text-gray-600 mb-2">Aperçu :</p>
-            <img [src]="imagePreview" alt="Image sélectionnée" class="w-48 h-auto mx-auto rounded-lg shadow" />
-          </div>
-        </div>
 
-
-        <!-- Actions -->
-        <div class="flex justify-end space-x-4 pt-6">
-          <button *ngIf="editingEventId" (click)="cancelEdit()" type="button"
-                  class="px-6 py-2.5 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 transition-all hover:scale-[1.02]">
-            Annuler
-          </button>
-          <button type="submit"
-                  class="px-8 py-2.5 bg-gradient-to-r from-primary to-primary-dark text-white rounded-lg shadow-md hover:shadow-lg transition-all transform hover:scale-[1.02]">
-            {{ editingEventId ? 'Sauvegarder' : 'Publier' }}
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- Liste des événements -->
-<section class="py-16 bg-white" *ngIf="events.length > 0">
-  <div class="container mx-auto px-4">
-    <h3 class="text-3xl font-bold text-gray-900 text-center mb-12">Événements à venir</h3>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div *ngFor="let event of events"
-           class="group bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
-        <div class="relative overflow-hidden rounded-t-2xl">
-          <img [src]="getImageUrl(event.id!)" alt="{{ event.title }}"
-               class="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-105">
-          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-          <div class="absolute bottom-4 left-4 text-white">
-            <p class="text-sm font-medium">{{ event.date | date }}</p>
-            <p class="text-sm font-medium">{{ event.time  }}</p>
-            <h4 class="text-xl font-bold mt-1">{{ event.title }}</h4>
-          </div>
-        </div>
-
-        <div class="p-6">
-          <p class="text-gray-600 mb-4 line-clamp-3">{{ event.description }}</p>
-          <div class="flex items-center text-sm text-gray-500 mb-4">
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-            </svg>
-            {{ event.location }}
-          </div>
-
-          <div class="flex justify-between border-t pt-4">
-            <button (click)="startEdit(event)"
-                    class="flex items-center text-primary hover:text-primary-dark transition-colors">
-              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
-              </svg>
-              Modifier
+          <!-- Actions -->
+          <div class="flex justify-end space-x-4 pt-6">
+            <button *ngIf="editingEventId" (click)="cancelEdit()" type="button"
+                    class="px-6 py-2.5 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50 transition-all hover:scale-[1.02]">
+              Annuler
             </button>
-            <button (click)="deleteEvent(event.id!)"
-                    class="flex items-center text-red-500 hover:text-red-600 transition-colors">
-              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-              </svg>
-              Supprimer
+            <button type="submit"
+                    class="px-8 py-2.5 bg-gradient-to-r from-primary to-primary-dark text-white rounded-lg shadow-md hover:shadow-lg transition-all transform hover:scale-[1.02]">
+              {{ editingEventId ? 'Sauvegarder' : 'Publier' }}
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
+  </section>
+</span>
+<!-- Tableau des événements -->
+<section class="py-16 bg-white" *ngIf="events.length > 0">
+  <div class="container mx-auto px-4">
+    <h3 class="text-3xl font-bold text-gray-900 text-center mb-10">Gestion des Événements</h3>
+
+    <div class="overflow-auto rounded-lg shadow">
+      <table class="min-w-full text-sm text-left text-gray-700">
+        <thead class="bg-primary text-white">
+        <tr>
+          <th class="px-6 py-3">Image</th>
+          <th class="px-6 py-3">Titre</th>
+          <th class="px-6 py-3">Date</th>
+          <th class="px-6 py-3">Heure</th>
+          <th class="px-6 py-3">Lieu</th>
+          <th class="px-6 py-3">Description</th>
+          <th class="px-6 py-3 text-center">Actions</th>
+        </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-200">
+        <tr *ngFor="let event of events" class="hover:bg-gray-50">
+          <td class="px-6 py-4">
+            <img [src]="getImageUrl(event.id!)" alt="Image" class="w-20 h-14 object-cover rounded">
+          </td>
+          <td class="px-6 py-4 font-medium">{{ event.title }}</td>
+          <td class="px-6 py-4">{{ event.date }}</td>
+          <td class="px-6 py-4">{{ event.time }}</td>
+          <td class="px-6 py-4">{{ event.location }}</td>
+          <td class="px-6 py-4 max-w-xs truncate">{{ event.description }}</td>
+          <td class="px-6 py-4 text-center space-x-2">
+            <button (click)="startEdit(event)"
+                    class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition">
+              ✏️ Modifier
+            </button>
+            <button (click)="askDelete(event.id!)"
+                    class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition">
+              🗑 Supprimer
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
+  <app-confirm-event-dialog
+    [show]="showConfirmDialog"
+    (confirm)="confirmDelete()"
+    (cancel)="showConfirmDialog = false"
+  />
 </section>
+

@@ -1,13 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {AppEvent} from '../../model/Event';
 import {EventService} from '../../services/event.service';
+import {ConfirmEventDialogComponent} from '../../sequeleton/confirm-event-dialog/confirm-event-dialog.component';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   standalone: true,
   selector: 'app-events',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ConfirmEventDialogComponent],
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.css']
 })
@@ -25,7 +27,30 @@ export class EventsComponent implements OnInit {
     location: ''
   };
 
-  constructor(private eventService: EventService) {}
+  @ViewChild('eventForm') eventFormRef!: ElementRef;
+
+  startEdit(event: AppEvent): void {
+    this.editingEventId = event.id!;
+    this.newEvent = {
+      title: event.title,
+      description: event.description,
+      date: event.date,
+      time: event.time,
+      location: event.location
+    };
+
+    this.selectedImage = null;
+
+    if (this.eventFormRef) {
+      setTimeout(() => {
+        this.eventFormRef.nativeElement.scrollIntoView({ behavior: 'smooth' });
+      }, 0);
+    }
+
+  }
+
+
+  constructor(private eventService: EventService,   private toastr: ToastrService ) {}
 
   ngOnInit(): void {
     this.loadEvents();
@@ -41,17 +66,6 @@ export class EventsComponent implements OnInit {
     this.selectedImage = event.target.files[0];
   }*/
 
-  startEdit(event: AppEvent): void {
-    this.editingEventId = event.id!;
-    this.newEvent = {
-      title: event.title,
-      description: event.description,
-      date: event.date,
-      time: event.time,
-      location: event.location
-    };
-    this.selectedImage = null;
-  }
 
   cancelEdit(): void {
     this.editingEventId = null;
@@ -74,14 +88,17 @@ export class EventsComponent implements OnInit {
       this.eventService.updateEvent(this.editingEventId, formData).subscribe(() => {
         this.cancelEdit();
         this.loadEvents();
+        this.toastr.success('Événement mis à jour avec succès', 'Modification');
       });
     } else {
       this.eventService.createEvent(formData).subscribe(() => {
         this.resetForm();
         this.loadEvents();
+        this.toastr.success('Événement ajouté avec succès', 'Création');
       });
     }
   }
+
 
   deleteEvent(id: number): void {
     if (confirm('Voulez-vous vraiment supprimer cet événement ?')) {
@@ -151,4 +168,26 @@ export class EventsComponent implements OnInit {
     }
   }
 
+  showConfirmDialog = false;
+  eventToDeleteId: number | null = null;
+
+  askDelete(id: number) {
+    this.eventToDeleteId = id;
+    this.showConfirmDialog = true;
+  }
+
+  confirmDelete() {
+    if (this.eventToDeleteId !== null) {
+      this.eventService.deleteEvent(this.eventToDeleteId).subscribe(() => {
+        this.loadEvents();
+        this.toastr.success('Événement supprimé avec succès', 'Suppression');
+        this.showConfirmDialog = false;
+        this.eventToDeleteId = null;
+      });
+    }
+  }
+
+
 }
+
+
