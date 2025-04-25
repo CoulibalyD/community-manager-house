@@ -22,6 +22,7 @@
     "@angular/router": "^19.1.0",
     "angular-gtag": "^1.0.4",
     "aos": "^2.3.4",
+    "ng-recaptcha": "^13.2.1",
     "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

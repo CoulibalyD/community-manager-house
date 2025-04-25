@@ -1,50 +1,108 @@
-<!-- Section Hero -->
-<section class="relative bg-primary text-white text-center py-32">
-  <div class="container mx-auto px-6" @fadeIn>
-    <h1 class="text-5xl font-bold mb-4">Contactez-nous</h1>
-    <p class="text-xl">Nous sommes là pour répondre à toutes vos questions.</p>
+<!-- 🎯 HERO -->
+<section class="relative bg-primary text-white text-center py-28 md:py-32">
+  <div class="container mx-auto px-6" [@fadeIn]>
+    <h1 class="text-4xl md:text-5xl font-extrabold mb-4">Contactez-nous</h1>
+    <p class="text-lg md:text-xl text-white/90">Une question, une suggestion ? Nous sommes là pour vous aider.</p>
   </div>
 </section>
 
-<!-- Formulaire de Contact -->
+<!-- 💌 FORMULAIRE -->
 <section class="py-20 bg-white">
-  <div class="container mx-auto px-6 max-w-4xl">
-    <h2 class="text-4xl font-bold mb-6 text-center" @fadeIn>Envoyez-nous un message</h2>
+  <div class="container mx-auto px-6 max-w-3xl">
+    <h2 class="text-3xl font-bold mb-10 text-center text-gray-800" [@fadeIn]>Envoyez-nous un message</h2>
 
-    <form (submit)="submitForm()" class="bg-gray-100 p-8 rounded-lg shadow-lg">
-      <div class="mb-6">
-        <label for="name" class="block text-gray-700 font-semibold">Nom</label>
-        <input [(ngModel)]="name" id="name" type="text" required
-               class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+    <form
+      (ngSubmit)="submitForm()"
+      #contactForm="ngForm"
+      class="bg-white border border-gray-200 p-8 rounded-xl shadow-sm space-y-6"
+    >
+      <!-- Nom & Email -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="name" class="block mb-2 font-semibold text-gray-700">Nom</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            [(ngModel)]="form.name"
+            required
+            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary outline-none"
+          />
+        </div>
+
+        <div>
+          <label for="email" class="block mb-2 font-semibold text-gray-700">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            [(ngModel)]="form.email"
+            required
+            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary outline-none"
+          />
+        </div>
       </div>
 
-      <div class="mb-6">
-        <label for="email" class="block text-gray-700 font-semibold">Email</label>
-        <input [(ngModel)]="email" id="email" type="email" required
-               class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+      <!-- Sujet -->
+      <div>
+        <label for="subject" class="block mb-2 font-semibold text-gray-700">Sujet</label>
+        <input
+          id="subject"
+          name="subject"
+          type="text"
+          [(ngModel)]="form.subject"
+          required
+          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary outline-none"
+        />
       </div>
 
-      <div class="mb-6">
-        <label for="message" class="block text-gray-700 font-semibold">Message</label>
-        <textarea [(ngModel)]="message" id="message" required
-                  class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+      <!-- Message -->
+      <div>
+        <label for="message" class="block mb-2 font-semibold text-gray-700">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          [(ngModel)]="form.message"
+          rows="5"
+          required
+          placeholder="Votre message ici..."
+          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary outline-none"
+        ></textarea>
       </div>
 
-      <button type="submit"
-              class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-black transition-transform transform hover:scale-105 w-full">
-        Envoyer
-      </button>
+      <!-- Bouton -->
+      <div class="text-center pt-2">
+        <button
+          type="submit"
+          [disabled]="!contactForm.form.valid || loading"
+          class="bg-primary text-white font-semibold px-8 py-3 rounded-lg hover:bg-primary-dark transition-all flex items-center justify-center gap-2"
+        >
+          <svg *ngIf="loading" class="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="white" stroke-width="4" fill="none"></circle>
+            <path class="opacity-75" fill="currentColor"
+                  d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+          </svg>
+          <span>{{ loading ? 'Envoi en cours...' : 'Envoyer' }}</span>
+        </button>
+
+      </div>
     </form>
   </div>
 </section>
 
-<!-- Carte Google Maps -->
+<!-- 🗺️ LOCALISATION -->
 <section class="py-20 bg-gray-100 text-center">
-  <h2 class="text-4xl font-bold mb-6" @fadeIn>Notre Adresse</h2>
+  <h2 class="text-3xl font-bold mb-6 text-gray-800" [@fadeIn]>Notre adresse</h2>
   <div class="container mx-auto px-6">
     <iframe
-      class="w-full h-80 rounded-lg shadow-lg"
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.999247080881!2d2.2922926156741274!3d48.85884427928774!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fdfbe2d0b1f%3A0x8a8c79e3c7a77b78!2sTour%20Eiffel!5e0!3m2!1sen!2sfr!4v1631690952000!5m2!1sen!2sfr"
-      allowfullscreen="" loading="lazy"></iframe>
+      width="100%"
+      height="400"
+      class="rounded-lg shadow-md"
+      style="border:0;"
+      loading="lazy"
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6148.773112037871!2d-7.98132930223998!3d12.632822345986747!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xe51cd1e8a3733d9%3A0x3c2fd15508cfb0b5!2sGolf%2C%20Bamako!5e0!3m2!1sfr!2sml!4v1713895550000!5m2!1sfr!2sml"
+    ></iframe>
   </div>
 </section>

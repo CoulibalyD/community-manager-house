@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  padding-top: 72px; /* Ajuste la hauteur en fonction de la navbar */
+  padding-top: 64px;
 }
 
 html, body { height: 100%; }

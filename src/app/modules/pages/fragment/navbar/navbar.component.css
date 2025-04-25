@@ -22,13 +22,3 @@
 a{
   font-size: 14px;
 }
-
-/*
-.nav-link {
-  @apply font-bold uppercase tracking-wide hover:text-yellow-300 transition-colors duration-300;
-}
-
-.active-link {
-  @apply text-yellow-300 border-b-2 border-yellow-300;
-}
-*/
